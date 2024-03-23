@@ -1,0 +1,30 @@
+[
+    {
+        "nom" : "Precieuse",
+        "cours" : [
+            {
+                "Francais" : 10,
+                "anglais" : 20
+            }
+        ]
+    },
+
+    {
+        "nom" : "Emma",
+        "cours" : [
+            {
+                "Francais" : 11,
+                "anglais" : 19
+            }
+        ]
+    },
+    {
+        "nom" : "Josue",
+        "cours" : [
+            {
+                "Francais" : 19,
+                "anglais" : 19
+            }
+        ]
+    }
+]

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./assets/Js/axios.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <div>
+                <label for="nom">Nom</label>
+                <input id="noms" type="text">
+            </div> <br>
+            <div> <br>
+                <label for="genre">Genre</label>
+                <select name="" id="genre">
+                    <option value="M">Masculin</option>
+                    <option value="F">Feminin</option>
+                </select>
+            </div> <br>
+            <div>
+                <label for="Lieu">Lieu</label>
+                <input id="lieu" type="text">
+            </div>
+            <br>
+            <div>
+                <label for="Date Naissance">Date Naissance</label>
+                <input id="datenaissance" type="date">
+            </div> <br>
+            <br>
+            <div>
+                <label for="Adresse">Adresse</label>
+                <input id="adresse" type="text">
+            </div> <br>
+            <div>
+                <button id="submit" type="submit">Enregistrer</button>
+            </div>
+        </div>
+        <table id="data">
+            <thead>
+                <tr>
+                    <th class="align-middle">Matricule</th>
+                    <th class="align-middle">Noms</th>
+                    <th class="align-middle">genre</th>
+                    <th class="align-middle">lieu</th>
+                    <th class="align-middle">date</th>
+                    <th class="align-middle">adresse</th>
+                    <th class="align-middle">action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                    function afficher() {
+                        document.querySelector('#data tbody').innerHTML = "";
+                        axios.get("/TP_LABO/api/etudiant/get_etudiant/?user=tplabo&mdp=12345").then((data) => {
+                            data.data.response.forEach(element => {
+                                let row = document.createElement('tr');
+                                let matricule = document.createElement('td');
+                                let noms = document.createElement('td');
+                                let genre = document.createElement('td');
+                                let lieu = document.createElement('td');
+                                let datenaissance = document.createElement('td');
+                                let adresse = document.createElement('td');
+                                let action = document.createElement('td');
+                                let supprimer = document.createElement('td');
+                                let buttonSup = document.createElement('button');
+                                let modifier = document.createElement('td');
+                                let buttonMod = document.createElement('button');
+
+
+                                buttonSup.addEventListener("click", function () {
+                                    let form = new FormData();
+                                    form.append('matricule', this.getAttribute('matricule').slice(3))
+                                    axios.post("/TP_LABO/api/etudiant/supprimer/?user=tplabo&mdp=12345", form).then(data => {
+                                        console.log(data);
+                                    })
+                                })
+                                matricule.textContent = element.matricule
+                                noms.textContent = element.noms
+                                genre.textContent = element.genre
+                                lieu.textContent = element.lieu
+                                datenaissance.textContent = element.datenaissance
+                                adresse.textContent = element.adresse
+                                action.textContent = element.action
+                                buttonSup.textContent = "Supprimer"
+                                buttonSup.setAttribute('matricule', "btn" + element.matricule)
+                                buttonSup.setAttribute('class', "supp")
+                                supprimer.append(buttonSup)
+                                buttonMod.textContent = "Modifier"
+                                buttonMod.setAttribute('matricule', "mod" + element.matricule)
+                                buttonMod.setAttribute('class', "modif")
+                                modifier.append(buttonMod)
+
+                                row.append(matricule)
+                                row.append(noms)
+                                row.append(genre)
+                                row.append(lieu)
+                                row.append(datenaissance)
+                                row.append(adresse)
+                                row.append(action)
+                                row.append(supprimer)
+                                row.append(modifier)
+                                document.querySelector('#data>tbody').appendChild(row)
+                            });
+
+                        })
+
+                    }
+                    afficher()
+                    setInterval(afficher, 30000)
+
+                </script>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./assets/Js/etudiant.js"></script>
+</body>
+
+</html>

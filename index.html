@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./assets/Js/axios.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+</head>
+
+<body>
+      <!-- Barre de navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Mon Application</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">A propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- FIn navbar -->
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+             <!-- Barre latérale -->
+             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">Menu Item 1</a>
+                        <a href="#" class="list-group-item list-group-item-action">Menu Item 2</a>
+                        <a href="#" class="list-group-item list-group-item-action">Menu Item 3</a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Fin sidebar -->
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Colonne pour le formulaire -->
+                            <div class="col-md-6">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div>
+                                            <div>
+                                                <label for="nom" class="form-label">Nom</label>
+                                                <input id="noms" type="text" class="form-control">
+                                            </div>
+                                            <div>
+                                                <label for="genre" class="form-label">Genre</label>
+                                                <select name="" id="genre" class="form-select">
+                                                    <option value="M">Masculin</option>
+                                                    <option value="F">Feminin</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="Lieu" class="form-label">Lieu</label>
+                                                <input id="lieu" type="text" class="form-control">
+                                            </div>
+                                            <div>
+                                                <label for="Date Naissance" class="form-label">Date Naissance</label>
+                                                <input id="datenaissance" type="date" class="form-control">
+                                            </div>
+                                            <div>
+                                                <label for="Adresse" class="form-label">Adresse</label>
+                                                <input id="adresse" type="text" class="form-control">
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <button id="submit" type="submit" class="btn btn-primary">Enregistrer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Colonne pour le tableau -->
+                            <div class="col-md-6">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="data" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="align-middle">Matricule</th>
+                                                        <th class="align-middle">Noms</th>
+                                                        <th class="align-middle">genre</th>
+                                                        <th class="align-middle">lieu</th>
+                                                        <th class="align-middle">date</th>
+                                                        <th class="align-middle">adresse</th>
+                                                        <th class="align-middle">action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <script>
+                                                        function afficher() {
+                                                            document.querySelector('#data tbody').innerHTML = "";
+                                                            axios.get("/TP_LABO/api/etudiant/get_etudiant/?user=tplabo&mdp=12345").then((data) => {
+                                                                data.data.response.forEach(element => {
+                                                                    let row = document.createElement('tr');
+                                                                    let matricule = document.createElement('td');
+                                                                    let noms = document.createElement('td');
+                                                                    let genre = document.createElement('td');
+                                                                    let lieu = document.createElement('td');
+                                                                    let datenaissance = document.createElement('td');
+                                                                    let adresse = document.createElement('td');
+                                                                    let action = document.createElement('td');
+                                                                    let supprimer = document.createElement('td');
+                                                                    let buttonSup = document.createElement('button');
+                                                                    let modifier = document.createElement('td');
+                                                                    let buttonMod = document.createElement('button');
+                            
+                            
+                                                                    buttonSup.addEventListener("click", function () {
+                                                                        let form = new FormData();
+                                                                        form.append('matricule', this.getAttribute('matricule').slice(3))
+                                                                        axios.post("/TP_LABO/api/etudiant/supprimer/?user=tplabo&mdp=12345", form).then(data => {
+                                                                            console.log(data);
+                                                                        })
+                                                                    })
+                                                                    matricule.textContent = element.matricule
+                                                                    noms.textContent = element.noms
+                                                                    genre.textContent = element.genre
+                                                                    lieu.textContent = element.lieu
+                                                                    datenaissance.textContent = element.datenaissance
+                                                                    adresse.textContent = element.adresse
+                                                                    action.textContent = element.action
+                                                                    buttonSup.textContent = "Supprimer"
+                                                                    buttonSup.setAttribute('matricule', "btn" + element.matricule)
+                                                                    buttonSup.setAttribute('class', "btn btn-danger supp")
+                                                                    supprimer.append(buttonSup)
+                                                                    buttonMod.textContent = "Modifier"
+                                                                    buttonMod.setAttribute('matricule', "mod" + element.matricule)
+                                                                    buttonMod.setAttribute('class', "btn btn-warning modif")
+                                                                    modifier.append(buttonMod)
+                            
+                                                                    row.append(matricule)
+                                                                    row.append(noms)
+                                                                    row.append(genre)
+                                                                    row.append(lieu)
+                                                                    row.append(datenaissance)
+                                                                    row.append(adresse)
+                                                                    row.append(action)
+                                                                    row.append(supprimer)
+                                                                    row.append(modifier)
+                                                                    document.querySelector('#data>tbody').appendChild(row)
+                                                                });
+                                                            })
+                                                        }
+                                                        afficher()
+                                                        setInterval(afficher, 3000)
+                                                    </script>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div> 
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="./assets/Js/etudiant.js"></script>
+</body>
+
+</html>

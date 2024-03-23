@@ -1,0 +1,18 @@
+:root{
+    --primary_color : rgba(85,106,204,.7);
+    --success_color : rgba(125, 233, 157, 0.759);
+    --error_color : rgba(251, 96, 57, 0.7);
+    --default_color : rgba(39, 39, 41, 0.7);
+    --on_focus_b_color : rgba(234, 237, 248, 0.7);
+}
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    border: none;
+    letter-spacing: 1px;
+    font-family: montserrat;
+    font-weight: 200;
+    text-decoration: none;
+    color: var(--default_color);
+}

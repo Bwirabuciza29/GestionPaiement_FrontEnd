@@ -1,0 +1,37 @@
+
+        /* Style pour le tableau */
+        #data {
+          width: 100%;
+          margin-top: 20px;
+      }
+      /* Style pour les cellules du tableau */
+      #data th,
+      #data td {
+          padding: 10px;
+          text-align: center;
+      }
+      /* Style pour les boutons dans le tableau */
+      #data .btn {
+          padding: 5px 10px;
+          font-size: 14px;
+      }
+       /* Styles CSS personnalisés */
+        /* Style pour la carte */
+        .custom-card {
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: box-shadow 0.3s ease-in-out;
+          margin-bottom: 20px;
+      }
+      /* Effet de survol sur la carte */
+      .custom-card:hover {
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+      /* Style pour les champs de saisie dans la carte */
+      .custom-card input,
+      .custom-card select,
+      .custom-card button {
+          margin-bottom: 10px;
+      }
