@@ -7,6 +7,7 @@
     <title>Document</title>
     <script src="./assets/Js/axios.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 
@@ -53,26 +54,26 @@
                                 <div class="card-body">
                                     <div>
                                         <label for="nom" class="form-label">Nom</label>
-                                        <input id="noms" type="text" class="form-control">
+                                        <input id="noms" type="text" class="form-control" required>
                                     </div>
                                     <div>
                                         <label for="genre" class="form-label">Genre</label>
-                                        <select name="" id="genre" class="form-select">
+                                        <select name="" id="genre" class="form-select" required>
                                             <option value="M">Masculin</option>
                                             <option value="F">Feminin</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label for="Lieu" class="form-label">Lieu</label>
-                                        <input id="lieu" type="text" class="form-control">
+                                        <input id="lieu" type="text" class="form-control" required>
                                     </div>
                                     <div>
                                         <label for="Date Naissance" class="form-label">Date Naissance</label>
-                                        <input id="datenaissance" type="date" class="form-control">
+                                        <input id="datenaissance" type="date" class="form-control" required>
                                     </div>
                                     <div>
                                         <label for="Adresse" class="form-label">Adresse</label>
-                                        <input id="adresse" type="text" class="form-control">
+                                        <input id="adresse" type="text" class="form-control" required>
                                     </div>
                                     <br>
                                     <div>
@@ -112,7 +113,7 @@
     <script>
         function afficher() {
             document.querySelector('#table-body').innerHTML = "";
-            axios.get("/TP_LABO/api/etudiant/get_etudiant/?user=tplabo&mdp=12345").then((data) => {
+            axios.get("https://apilabo2groupe1.000webhostapp.com/etudiant/get_etudiant/?user=tplabo&mdp=12345").then((data) => {
                 data.data.response.forEach(element => {
                     let row = document.createElement('tr');
                     row.innerHTML = `
@@ -149,7 +150,7 @@
         });
 
         afficher();
-        setInterval(afficher, 3000);
+        setInterval(afficher, 30000);
     </script>
        
        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

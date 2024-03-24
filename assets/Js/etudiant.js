@@ -15,7 +15,7 @@
         form.append('datenaissance', datenaissance)
         form.append('adresse', adresse)
 
-        axios.post("/TP_LABO/api/etudiant/enregistrer/?user=tplabo&mdp=12345", form).then((data) => {
+        axios.post("https://apilabo2groupe1.000webhostapp.com/etudiant/enregistrer/?user=tplabo&mdp=12345", form).then((data) => {
             console.log(data);
             let inputs = document.querySelectorAll("input")
             inputs.forEach((index) => {
